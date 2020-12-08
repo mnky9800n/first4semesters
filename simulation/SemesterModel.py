@@ -31,13 +31,22 @@ class StudentAgent(Agent):
         self.grade = 0
         
     def does_class_work(self):
-        prob_does_class_work = 0.25
+#         prob_does_class_work = 0.25
+        prob_does_class_work = 0.5
         
         if self.hs_gpa > 3.0:
-            prob_does_class_work += 0.25
+#             prob_does_class_work += 0.25
+            prob_does_class_work += np.random.normal(0.25, 0.1)
         
         if self.parent_college_educated == 1:
-            prob_does_class_work += 0.25
+#             prob_does_class_work += 0.25
+            prob_does_class_work += np.random.normal(0.25, 0.1)
+    
+        if prob_does_class_work < 0:
+            prob_does_class_work = 0
+            
+        if prob_does_class_work > 1:
+            prob_does_class_work = 1
             
         return np.random.binomial(1, prob_does_class_work)
     
